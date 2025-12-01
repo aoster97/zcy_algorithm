@@ -1,3 +1,4 @@
+// ProblemFactory.java
 package learning.factory;
 
 import learning.annotation.ProblemAnnotation;
@@ -13,6 +14,7 @@ import java.util.Map;
 public class ProblemFactory {
 
     private final Map<Integer, Problem> problems = new HashMap<>();
+    private final Map<String, Problem> videoProblems = new HashMap<>();
 
     @Autowired
     public ProblemFactory(ApplicationContext context) {
@@ -22,6 +24,9 @@ public class ProblemFactory {
             ProblemAnnotation annotation = problem.getClass().getAnnotation(ProblemAnnotation.class);
             if (annotation != null) {
                 problems.put(annotation.id(), problem);
+                if (!annotation.videoNumber().isEmpty()) {
+                    videoProblems.put(annotation.videoNumber(), problem);
+                }
             }
         }
     }
@@ -33,10 +38,25 @@ public class ProblemFactory {
         return problems.get(id);
     }
 
+    public Problem getProblemByVideoNumber(String videoNumber) {
+        return videoProblems.get(videoNumber);
+    }
+
     public void listProblems() {
         problems.forEach((id, problem) -> {
             ProblemAnnotation annotation = problem.getClass().getAnnotation(ProblemAnnotation.class);
-            System.out.println(id + " -> " + annotation.title());
+            System.out.println(id + " -> " + annotation.title() +
+                             " (Video: " + annotation.videoNumber() + ", Category: " + annotation.category() + ")");
+        });
+    }
+
+    public void listProblemsByCategory(String category) {
+        System.out.println("Category: " + category);
+        problems.forEach((id, problem) -> {
+            ProblemAnnotation annotation = problem.getClass().getAnnotation(ProblemAnnotation.class);
+            if (annotation != null && category.equals(annotation.category())) {
+                System.out.println("  " + annotation.videoNumber() + " (" + id + ") -> " + annotation.title());
+            }
         });
     }
 }
