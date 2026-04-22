@@ -1,8 +1,7 @@
 // Problem2.java
-package learning.problem.problemimpl;
+package learning;
 
 import learning.annotation.ProblemAnnotation;
-import learning.problem.Problem;
 import org.junit.jupiter.api.Test;
 import org.springframework.stereotype.Component;
 

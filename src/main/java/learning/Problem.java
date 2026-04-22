@@ -1,5 +1,5 @@
 // Problem.java
-package learning.problem;
+package learning;
 
 public interface Problem {
     void run();

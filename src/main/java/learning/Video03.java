@@ -1,12 +1,10 @@
 // Problem1.java
-package learning.problem.problemimpl;
+package learning;
 
 import learning.annotation.ProblemAnnotation;
-import learning.problem.Problem;
 import org.junit.jupiter.api.Test;
-import org.springframework.stereotype.Component;
 
-@Component
+
 @ProblemAnnotation(id = 1, title = "二进制和位运算", videoNumber = "03", category = "入门")
 public class Video03 implements Problem {
 
@@ -52,7 +50,7 @@ public class Video03 implements Problem {
      *
      * @since 2025-12-01
      */
-
+    @Test
     @Override
     public void run() {
         System.out.println("Running Video 03: 二进制和位运算");
